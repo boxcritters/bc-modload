@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+  "name": "Box Critters ModLoad",
+  "version": "0.1.1",
+
+  "applications": {
+    "gecko": {
+      "id": "bc-modload@boxcrittersmods.ga",
+      "strict_min_version": "59.0a1"
+    }
+  },
+
+  "description": "Load Box Critters mods.",
+  "icons": {
+    "32": "icons/icon.png",
+    "48": "icons/icon.png",
+    "64": "icons/icon.png"
+  },
+
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://boxcritters.com/lib/*"
+  ],
+
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/icon.png",
+      "48": "icons/icon.png",
+      "64": "icons/icon.png"
+    },
+    "default_title": "Box Critters ModLoad",
+    "default_popup": "popup/index.html",
+    "browser_style": true
+  },
+
+  "background": {
+    "scripts": ["background/background.js"]
+  }
+}

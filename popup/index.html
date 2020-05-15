@@ -1,0 +1,53 @@
+<!--
+   index.html
+   
+   Copyright 2020 Alvarito050506 <donfrutosgomez@gmail.com>
+   Copyright 2020 The Box Critters Modding Community
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; version 2 of the License.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="bootstrap.min.css" />
+	</head>
+	<body>
+		<div class="container" id="main">
+			<div class="row justify-content-center">
+				<div class="col col-sm-10 col-md-8 col-lg-6">
+					<h1 class="h3 mb-3 font-weight-normal">Box Critters ModLoad</h1>
+					<div>
+						<img src="../icons/icon_alt.png" width="100">
+					</div>
+					<div class="form-group">
+						<input class="form-control" placeholder="Mod URL" id="url" autofocus />
+					</div>
+					<div class="form-group">
+						<button id="add" class="btn btn-primary">Add</button>
+						<button id="config" class="btn btn-light"><img src="../icons/gear_fill.svg"></img></button>
+					</div>
+					<div id="error" class="alert alert-danger">Error: </div>
+				</div>
+			</div>
+		</div>
+		<script src="main.js"></script>
+	</body>
+</html>
