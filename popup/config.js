@@ -24,6 +24,8 @@
 var browser = browser || chrome;
 
 var error_dom = document.getElementById("error");
+var nomods_dom = document.getElementById("nomods");
+var mods_dom = document.getElementById("mods");
 
 function remove(url, id)
 {
@@ -38,6 +40,8 @@ function remove(url, id)
 
 function main()
 {
+	error_dom.style.display = "none";
+	error_dom.innerHTML = "";
 	browser.storage.local.get(["mods"], function (values) {
 		values.mods.forEach(function (mod) {
 			var req = new Request(mod, {
@@ -55,19 +59,19 @@ function main()
 					var description = body.match(/\/\/\s*@description\s+(.*)\s*\n/i)[1];
 					var author = body.match(/\/\/\s*@author\s+(.*)\s*\n/i)[1];
 					var version = body.match(/\/\/\s*@version\s+(.*)\s*\n/i)[1];
-					document.getElementById("nomods").style.display = "none";
-					document.getElementById("mods").innerHTML = `${document.getElementById("mods").innerHTML}\n\t\t\t\t\t<div class="card-body">\n\t\t\t\t\t\t<div id="${name.toLowerCase().replace(/ /, "-")}">\n\t\t\t\t\t\t\t<div class="list-group-item tp-item btn-group">\n\t\t\t\t\t\t\t\t<div class="tp-link">\n\t\t\t\t\t\t\t\t\t<div class="d-flex w-100 justify-content-between">\n\t\t\t\t\t\t\t\t\t\t<h5 class="mb-1">${name}\t<small class="text-muted" id="version">${version}</small></h5><button type="button" class="close" aria-label="Remove" id="remove-${name.toLowerCase().replace(/ /, "-")}"><img src="../icons/trash.svg"></img></button>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t<p class="mb-1">${description}</p>\n\t\t\t\t\t\t\t\t\t<small class="text-muted">by ${author}</small>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>`;
+					nomods_dom.style.display = "none";
+					mods_dom.innerHTML = `${document.getElementById("mods").innerHTML}\n\t\t\t\t\t<div class="card-body">\n\t\t\t\t\t\t<div id="${name.toLowerCase().replace(/ /, "-")}">\n\t\t\t\t\t\t\t<div class="list-group-item tp-item btn-group">\n\t\t\t\t\t\t\t\t<div class="tp-link">\n\t\t\t\t\t\t\t\t\t<div class="d-flex w-100 justify-content-between">\n\t\t\t\t\t\t\t\t\t\t<h5 class="mb-1">${name}\t<small class="text-muted" id="version">${version}</small></h5><button type="button" class="close" aria-label="Remove" id="remove-${name.toLowerCase().replace(/ /, "-")}"><img src="../icons/trash.svg"></img></button>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t<p class="mb-1">${description}</p>\n\t\t\t\t\t\t\t\t\t<small class="text-muted">by ${author}</small>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>`;
 					document.getElementById(`remove-${name.toLowerCase().replace(/ /, "-")}`).addEventListener("click", function (event) {
 						remove(mod, name.toLowerCase().replace(/ /, "-"));
 					});
 				} catch (err)
 				{
 					error_dom.innerHTML = `Error: ${err}`;
-					error_dom.style.visibility = "visible";
+					error_dom.style.display = "block";
 				}
 			}).catch(function (err) {
 				error_dom.innerHTML = `Error: ${err}`;
-				error_dom.style.visibility = "visible";
+				error_dom.style.display = "block";
 			});
 		});
 	});

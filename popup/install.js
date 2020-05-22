@@ -24,6 +24,7 @@
 var browser = browser || chrome;
 
 var error_dom = document.getElementById("error");
+var success_dom = document.getElementById("success");
 var name_dom = document.getElementById("name");
 var description_dom = document.getElementById("description");
 var author_dom = document.getElementById("author");
@@ -36,37 +37,42 @@ function get_url()
 
 function add_mod()
 {
-	error_dom.style.visibility = "hidden";
+	error_dom.style.display = "none";
 	error_dom.innerHTML = "";
 
 	browser.storage.local.get(["mods"], function (values) {
 		if (values.mods && values.mods.indexOf(get_url()) == -1)
 		{
+			values.mods.push(get_url())
 			browser.storage.local.set({
-				"mods": values.mods.push(get_url())
+				"mods": values.mods
 			});
+			success_dom.style.display = "block";
 		} else if (!values.mods)
 		{
 			browser.storage.local.set({
 				"mods": [get_url()]
 			});
+			success_dom.style.display = "block";
 		} else
 		{
 			error_dom.innerHTML = "Error: The mod is already installed.";
-			error_dom.style.visibility = "visible";
+			success_dom.style.display = "none";
+			error_dom.style.display = "block";
 		}
 	});
 }
 
 function main()
 {
-	error_dom.style.visibility = "hidden";
+	error_dom.style.display = "none";
 	error_dom.innerHTML = "";
+	success_dom.style.display = "none";
 
 	if (!get_url())
 	{
 		error_dom.innerHTML = "Error: Mod URL not provided.";
-		error_dom.style.visibility = "visible";
+		error_dom.style.display = "block";
 		return -1;
 	}
 
@@ -87,18 +93,18 @@ function main()
 			var author = body.match(/\/\/\s*@author\s+(.*)\s*\n/i)[1];
 			var version = body.match(/\/\/\s*@version\s+(.*)\s*\n/i)[1];
 			document.getElementById("noinfo").style.display = "none";
-			document.getElementById("info").style.visibility = "visible";
+			document.getElementById("info").style.display = "block";
 			name_dom.innerHTML = `${name}\t<small class="text-muted" id="version">${version}</small>`;
 			description_dom.innerHTML = description;
 			author_dom.innerHTML = `by ${author}`;
 		} catch (err)
 		{
 			error_dom.innerHTML = `Error: ${err}`;
-			error_dom.style.visibility = "visible";
+			error_dom.style.display = "block";
 		}
 	}).catch(function (err) {
 		error_dom.innerHTML = `Error: ${err}`;
-		error_dom.style.visibility = "visible";
+		error_dom.style.display = "block";
 	});
 }
 

@@ -20,5 +20,8 @@
 #  
 
 all:
+	rm -rf build/
 	mkdir -p ./build/
-	zip -r ./build/bc-modload.xpi * -x ./build/ >/dev/null
+	zip -r ./build/bc-modload.xpi * -x "build/*" -x Makefile -x README.md >/dev/null
+	zip -r ./build/bc-modload.zip * -x "build/*" -x Makefile -x README.md >/dev/null
+	zip -r ./build/bc-modload.crx * -x "build/*" -x Makefile -x README.md >/dev/null

@@ -22,6 +22,8 @@
  */
 
 var browser = browser || chrome;
+var client = "";
+var mods = "";
 
 function listener(req)
 {
@@ -48,7 +50,6 @@ function listener(req)
 					str = `${str}\n${body}`;
 					filter.write(encoder.encode(str));
 					filter.disconnect();
-					console.log(str);
 				}).catch(function (err) {
 					console.error(`Error: ${err}`);
 				});
@@ -57,11 +58,54 @@ function listener(req)
 	};
 }
 
-browser.webRequest.onBeforeRequest.addListener(
-	listener,
-	{
-		"urls": ["*://boxcritters.com/lib/*"],
-		"types": ["main_frame", "script"]
-	},
-	["blocking"]
-);
+function update(changes, ctx)
+{
+	browser.storage.local.get(["mods"], function (values) {
+		mods = btoa(JSON.stringify(values.mods));
+	});
+}
+
+function chrome_listener(req)
+{
+	return {
+		"redirectUrl": `https://api.boxcrittersmods.ga/applymod/${mods}`
+	};
+}
+
+if (chrome)
+{
+	browser.storage.onChanged.addListener(update);
+	browser.webRequest.onBeforeRequest.addListener(
+		chrome_listener,
+		{
+			"urls": ["*://boxcritters.com/lib/*"],
+			"types": ["main_frame", "script"]
+		},
+		["blocking"]
+	);
+
+	var req = new Request("https://boxcritters.com/lib/client180.min.js", {
+		"method": "GET",
+		"redirect": "follow",
+		"referrer": "client"
+	});
+
+	fetch(req).then(function (res) {
+		return res.text();
+	}).then(function (body) {
+		client += body;
+		update();
+	}).catch(function (err) {
+		console.error(`Error: ${err}`);
+	});
+} else
+{
+	browser.webRequest.onBeforeRequest.addListener(
+		listener,
+		{
+			"urls": ["*://boxcritters.com/lib/*"],
+			"types": ["main_frame", "script"]
+		},
+		["blocking"]
+	);
+}

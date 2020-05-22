@@ -29,7 +29,7 @@ var encoded_url;
 
 function add_mod()
 {
-	error_dom.style.visibility = "hidden";
+	error_dom.style.display = "none";
 
 	var req = new Request(url_dom.value, {
 		"method": "GET",
@@ -47,14 +47,14 @@ function add_mod()
 		});
 		window.close();
 	}).catch(function (err) {
-		document.getElementById("error").innerHTML = `Error: ${err.message}`;
-		error_dom.style.visibility = "visible";
+		error_dom.innerHTML = `Error: ${err.message}`;
+		error_dom.style.display = "block";
 	});
 }
 
 function open_config()
 {
-	error_dom.style.visibility = "hidden";
+	error_dom.style.display = "none";
 	browser.tabs.create({
 		"url": browser.extension.getURL("popup/config.html"),
 		"active": true
@@ -62,5 +62,6 @@ function open_config()
 	window.close();
 }
 
+error_dom.style.display = "none";
 document.getElementById("add").addEventListener("click", add_mod);
 document.getElementById("config").addEventListener("click", open_config);

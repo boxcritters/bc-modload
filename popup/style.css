@@ -24,6 +24,7 @@
 body
 {
 	min-width: 350px;
+	min-height: 350px;
 }
 
 #main
@@ -37,14 +38,9 @@ input
 	margin-bottom: 1em;
 }
 
-#error
+#error, #info, #success
 {
-	visibility: hidden;
-}
-
-#info
-{
-	visibility: hidden;
+	display: none;
 }
 
 #textarea
