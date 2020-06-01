@@ -50,6 +50,10 @@ function listener(req)
 			console.error(`Error: ${err}`);
 		});
 		browser.storage.local.get(["mods"], function (values) {
+			if (!values)
+			{
+				 values = new Array();
+			}
 			values.mods.forEach(function (mod) {
 				fetch(mod).then(function (res) {
 					return res.text();
