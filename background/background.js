@@ -85,7 +85,7 @@ if (chrome)
 	browser.webRequest.onBeforeRequest.addListener(
 		chrome_listener,
 		{
-			"urls": ["*://*.boxcritters.com/lib/*"],
+			"urls": ["*://*.boxcritters.com/lib/client.min.js"],
 			"types": ["main_frame", "script"]
 		},
 		["blocking"]
