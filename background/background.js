@@ -42,6 +42,13 @@ function listener(req)
 	filter.onstop = function (event) {
 		data.push(decoder.decode());
 		str = data.join("");
+		fetch("https://cdn.boxcrittersmods.ga/crittersdk/master/src/lib.js").then(function (res) {
+			return res.text();
+		}).then(function (body) {
+			filter.write(encoder.encode(str));
+		}).catch(function (err) {
+			console.error(`Error: ${err}`);
+		});
 		browser.storage.local.get(["mods"], function (values) {
 			values.mods.forEach(function (mod) {
 				fetch(mod).then(function (res) {
@@ -78,13 +85,13 @@ if (chrome)
 	browser.webRequest.onBeforeRequest.addListener(
 		chrome_listener,
 		{
-			"urls": ["*://boxcritters.com/lib/*"],
+			"urls": ["*://*.boxcritters.com/lib/*"],
 			"types": ["main_frame", "script"]
 		},
 		["blocking"]
 	);
 
-	var req = new Request("https://boxcritters.com/lib/client180.min.js", {
+	var req = new Request("https://play.boxcritters.com/lib/client.min.js", {
 		"method": "GET",
 		"redirect": "follow",
 		"referrer": "client"
@@ -103,7 +110,7 @@ if (chrome)
 	browser.webRequest.onBeforeRequest.addListener(
 		listener,
 		{
-			"urls": ["*://boxcritters.com/lib/*"],
+			"urls": ["*://*.boxcritters.com/lib/client.min.js"],
 			"types": ["main_frame", "script"]
 		},
 		["blocking"]
