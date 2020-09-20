@@ -19,7 +19,7 @@ Or from the Chrome Web Store:
 You can also get the XPInstall, CRX and ZIP files from the [releases](https://github.com/boxcritters/bc-modload/releases) section.
 
 ## Licensing
-All the code of this project is licensed under the [GNU General Public License version 2.0](https://github.com/Alvarito050506/MCPIL/blob/master/LICENSE) (GPL-2.0).
+All the code of this project is licensed under the [GNU General Public License version 2.0](https://github.com/boxcrittersmods/bc-modload/blob/master/LICENSE) (GPL-2.0).
 
 All the documentation of this project is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) (CC BY-SA 4.0) license.
 
