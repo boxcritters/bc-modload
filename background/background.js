@@ -42,7 +42,7 @@ function listener(req)
 	filter.onstop = function (event) {
 		data.push(decoder.decode());
 		str = data.join("");
-		fetch("https://cdn.boxcrittersmods.ga/crittersdk/master/src/lib.js").then(function (res) {
+		fetch("https://cdn.bcmc.ga/crittersdk/master/src/lib.js").then(function (res) {
 			return res.text();
 		}).then(function (body) {
 			filter.write(encoder.encode(str));
@@ -99,7 +99,7 @@ function chrome_listener(req)
 		console.error(`Error: ${err}`);
 	});
 	return {
-		"redirectUrl": `https://api.boxcrittersmods.ga/applymod/${mods || btoa(JSON.stringify(new Array()))}`
+		"redirectUrl": `https://api.bcmc.ga/applymod/${mods || btoa(JSON.stringify(new Array()))}`
 	};
 }
 

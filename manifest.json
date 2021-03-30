@@ -5,7 +5,7 @@
 
   "applications": {
     "gecko": {
-      "id": "bc-modload@boxcrittersmods.ga",
+      "id": "bc-modload@bcmc.ga",
       "strict_min_version": "59.0a1"
     }
   },
